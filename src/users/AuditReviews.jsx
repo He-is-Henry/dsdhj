@@ -35,6 +35,7 @@ const AuditReviews = () => {
     if (filter === "unverified") return r.verified === false;
     return true;
   });
+  if (!filteredReviews.length) return <p>Nothing to show </p>;
 
   return (
     <div className="audit-page">

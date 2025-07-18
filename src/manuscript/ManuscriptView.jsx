@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+// const backendBase = "http://localhost:5000";
+const backendBase = "https://dsdhj-api.onrender.com/";
 
 const ManuscriptView = () => {
   const { state } = useLocation();
@@ -38,7 +40,7 @@ const ManuscriptView = () => {
         <a
           href={
             isPdfFile
-              ? `http://localhost:5000/files/download?url=${manuscript.file}`
+              ? `${backendBase}/files/download?url=${manuscript.file}`
               : manuscript.file
           }
           target="_blank"

@@ -12,6 +12,8 @@ const CurrentIssue = () => {
     };
     getCurrentIssue();
   }, []);
+  if (!currentIssue.length) return <p>Nothing to show </p>;
+
   return (
     <div>
       <h2>Current Issue</h2>

@@ -42,6 +42,7 @@ const Archive = () => {
     };
   });
 
+  if (!archive.length) return <p>Nothing to show </p>;
   return (
     <div className="archive-grouped">
       {structured.map(({ year, volume, issues }) => (
