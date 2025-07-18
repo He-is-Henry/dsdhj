@@ -4,6 +4,8 @@ import { useAuth } from "../context/UserContext";
 import { FaCheck, FaTrash } from "react-icons/fa";
 
 const AuditReviews = () => {
+  const [loading, setLoading] = useState(true);
+
   const [reviews, setReviews] = useState([]);
   const [filter, setFilter] = useState("unverified");
 
@@ -13,6 +15,8 @@ const AuditReviews = () => {
       setReviews(res.data);
     } catch (err) {
       console.error("Error fetching audit reviews", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,6 +39,8 @@ const AuditReviews = () => {
     if (filter === "unverified") return r.verified === false;
     return true;
   });
+  if (loading) return <p>Loading...</p>;
+
   if (!filteredReviews.length) return <p>Nothing to show </p>;
 
   return (

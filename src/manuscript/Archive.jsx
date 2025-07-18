@@ -4,10 +4,12 @@ import axios from "../api/axios";
 
 const Archive = () => {
   const [archive, setArchive] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getArchive = async () => {
       const { data } = await axios.get("published/archive");
       setArchive(data);
+      setLoading(false);
     };
     getArchive();
   }, []);
@@ -41,7 +43,7 @@ const Archive = () => {
       })),
     };
   });
-
+  if (loading) return <p>Loading...</p>;
   if (!archive.length) return <p>Nothing to show </p>;
   return (
     <div className="archive-grouped">
