@@ -1,7 +1,7 @@
-import React from "react";
 import { FaUserCircle } from "react-icons/fa";
+import UserActions from "./UserActions";
 
-const UserDetails = ({ user }) => {
+const UserDetails = ({ user, setUsers }) => {
   return (
     <div className="user-details">
       <div className="avatar">
@@ -23,6 +23,8 @@ const UserDetails = ({ user }) => {
           ))}
         </div>
       </div>
+
+      <UserActions user={user} setUsers={setUsers} />
     </div>
   );
 };

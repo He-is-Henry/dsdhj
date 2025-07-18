@@ -28,8 +28,8 @@ import CompleteInvite from "./users/CompleteInvite";
 import SendReset from "./users/SendReset";
 import VerifyReset from "./users/VerifyReset";
 import ManuscriptView from "./manuscript/ManuscriptView";
-import Messages from "./users/Messages";
 import PaymentPage from "./manuscript/PaymentPage";
+import AdminMessages from "./users/AdminMessages";
 
 function App() {
   return (
@@ -47,14 +47,13 @@ function App() {
               <RequireAuth allowedRoles={["author", "editor", "admin"]} />
             }
           >
-            <Route path="send-reset" element={<SendReset />} />
             <Route path="reset-password/:token" element={<VerifyReset />} />
             <Route path="/view/:manuscriptId" element={<ManuscriptDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["editor", "admin"]} />}>
-            <Route path="/messages" element={<Messages />} />
+            <Route path="/messages" element={<AdminMessages />} />
             <Route path="/audit-reviews" element={<AuditReviews />} />
             <Route path="/manuscripts" element={<ReviewManuscripts />} />
             <Route path="/issuing" element={<Issuing />} />
@@ -64,6 +63,7 @@ function App() {
             <Route path="/users" element={<UsersList />} />
             <Route path="/invite" element={<InviteUser />} />
           </Route>
+          <Route path="send-reset" element={<SendReset />} />
           <Route path="/pay/:id" element={<PaymentPage />} />
           <Route path="/invite/:token" element={<CompleteInvite />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
@@ -77,7 +77,6 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-
           <Route path="/*" element={<Missing />} />
         </Routes>
         <Toaster

@@ -15,6 +15,7 @@ import { useAuth } from "../context/UserContext";
 import { useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import toast from "react-hot-toast";
+import { FaMessage } from "react-icons/fa6";
 
 const Header = () => {
   const timeoutRef = useRef(null);
@@ -88,6 +89,11 @@ const Header = () => {
         to: "/users",
         icon: <FaUser />,
         label: "Users",
+      },
+      {
+        to: "/messages",
+        icon: <FaMessage />,
+        label: "Messages",
       }
     );
   if (user) {

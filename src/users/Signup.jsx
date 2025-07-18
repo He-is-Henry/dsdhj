@@ -57,28 +57,25 @@ const Signup = () => {
     password: "",
     confirm: "",
   });
-  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || "/login";
   if (from.includes("/reset-password") || from.includes("/send-reset")) {
     from = "/";
   }
 
   const handleChange = (e) => {
-    setErrorMsg("");
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    setErrorMsg("");
     e.preventDefault();
 
     if (form.password !== form.confirm) {
-      return setErrorMsg("Password must match confirm");
+      return toast.error("Password must match confirm");
     }
     if (form.password.length < 8) {
-      return setErrorMsg("Password less than 8 characters");
+      return toast.error("Password less than 8 characters");
     }
 
     try {
@@ -92,14 +89,13 @@ const Signup = () => {
     } catch (err) {
       const message =
         err.response?.data?.error || "Something went wrong. Try again.";
-      setErrorMsg(message);
+      toast.error(message);
     }
   };
 
   return (
     <div style={styles.container}>
       <h2>Sign up as an author</h2>
-      {errorMsg && <p style={styles.error}>{errorMsg}</p>}
 
       <form onSubmit={handleSubmit}>
         <label>First Name:</label>

@@ -17,7 +17,7 @@ const UsersList = () => {
       <h2>All users</h2>
       <Link to="/invite">Invite New User</Link>
       {users.map((user) => (
-        <UserDetails key={user._id} user={user} />
+        <UserDetails key={user._id} user={user} setUsers={setUsers} />
       ))}
     </div>
   );
