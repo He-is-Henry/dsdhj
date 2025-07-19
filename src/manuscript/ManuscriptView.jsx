@@ -1,11 +1,13 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// const backendBase = "http://localhost:5000";
+import axios from "../api/axios";
 const backendBase = "https://dsdhj-api.onrender.com/";
 
 const ManuscriptView = () => {
-  const { state } = useLocation();
-  const manuscript = state?.manuscript;
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [manuscript, setManuscript] = useState({});
+  const [errMsg, setErrMsg] = useState("");
   const [isPdfFile, setIsPDFFile] = useState(undefined);
 
   useEffect(() => {
@@ -13,12 +15,30 @@ const ManuscriptView = () => {
     setIsPDFFile(!/\.\w{3,4}$/.test(manuscript.file));
   }, [manuscript]);
 
+  useEffect(() => {
+    const getManuscript = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`/published/${id}`);
+        console.log(response);
+        setManuscript(response.data);
+      } catch (err) {
+        setErrMsg(err?.response?.data?.error || "Failed to get manuscript");
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getManuscript();
+  }, []);
   if (!manuscript) return <p>Manuscript not found.</p>;
   console.log(manuscript.file);
 
   const allAuthors = [manuscript.name, ...(manuscript.coauthors || [])];
   const authorDisplay =
     allAuthors.length > 10 ? `${allAuthors[0]} et al.` : allAuthors.join(", ");
+  if (loading) return <p>Loading...</p>;
+  if (errMsg) return <p> {errMsg}</p>;
 
   return (
     <div style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto" }}>
@@ -35,7 +55,11 @@ const ManuscriptView = () => {
         <strong>Abstract:</strong>
       </p>
       <p style={{ lineHeight: "1.6" }}>{manuscript.abstract}</p>
-
+      <p>
+        {" "}
+        <strong>Views: </strong>
+        {manuscript.views}
+      </p>
       <div style={{ marginTop: "2rem" }}>
         <a
           href={
@@ -56,6 +80,24 @@ const ManuscriptView = () => {
           }}
         >
           Download Full Paper
+        </a>
+        <a
+          href={`https://docs.google.com/viewer?url=${encodeURIComponent(
+            manuscript.file
+          )}&embedded=true`}
+          target="_blank"
+          style={{
+            display: "inline-block",
+            padding: "0.6rem 1.2rem",
+            margin: "20px",
+            backgroundColor: "#1e3a8a",
+            color: "#fff",
+            textDecoration: "none",
+            borderRadius: "5px",
+            fontWeight: "bold",
+          }}
+        >
+          View
         </a>
       </div>
     </div>

@@ -3,26 +3,23 @@ import { Link } from "react-router-dom";
 const About = ({ short = false }) => {
   const containerStyle = {
     padding: "1.2rem",
-    backgroundColor: "#e8f0fe",
     borderRadius: "1rem",
     color: "#093238",
     lineHeight: "1.6",
     marginBottom: "2rem",
-  };
-
-  const headingStyle = {
-    fontSize: "1.8rem",
-    marginBottom: "1rem",
-    color: "#1e3a8a",
+    textAlign: "left",
   };
 
   const paragraphStyle = {
     marginBottom: "1rem",
   };
-
+  const submitButton = {
+    padding: "10px",
+    borderRadius: "30px",
+  };
   return (
     <section style={containerStyle}>
-      <h2 style={headingStyle}>About the Journal</h2>
+      <h2 className="custom-heading">About us</h2>
 
       <p style={paragraphStyle}>
         Delta State Dental and Health Journal is a peer-reviewed, open access
@@ -50,7 +47,7 @@ const About = ({ short = false }) => {
           </p>
         </>
       )}
-      <button className="blue-button">
+      <button className="blue-button" style={submitButton}>
         <Link to="/submit">Submit a manuscript</Link>
       </button>
     </section>

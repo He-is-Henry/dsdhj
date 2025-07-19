@@ -5,6 +5,7 @@ const EditorialBoard = () => {
     borderRadius: "1rem",
     color: "#093238",
     marginBottom: "2rem",
+    textAlign: "left",
   };
 
   const headingStyle = {
@@ -23,12 +24,9 @@ const EditorialBoard = () => {
   const paragraphStyle = {
     lineHeight: "1.6",
     marginBottom: "1rem",
-    textAlign: "left",
   };
 
   const ulStyle = {
-    textAlign: "left",
-
     paddingLeft: "1.5rem",
     listStyle: "none",
     marginBottom: "1rem",

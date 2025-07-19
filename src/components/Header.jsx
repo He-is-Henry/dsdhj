@@ -6,17 +6,17 @@ import {
   FaUser,
   FaRegUser,
   FaFileAlt,
-  FaBars,
   FaTimes,
   FaReply,
   FaBook,
+  FaArchive,
 } from "react-icons/fa";
 import { useAuth } from "../context/UserContext";
 import { useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import toast from "react-hot-toast";
 import { FaMessage } from "react-icons/fa6";
-
+import MenuIcon from "./MenuIcon";
 const Header = () => {
   const timeoutRef = useRef(null);
   const { user, setChecked, setUser } = useAuth();
@@ -39,6 +39,8 @@ const Header = () => {
     { to: "/archive", label: "Archives" },
     { to: "/author-guidelines", label: "Guidelines" },
     { to: "/reviews", label: "Reviews" },
+    { to: "/editorial-board", label: "Editorial Board" },
+    { to: "/recent-uploads", label: "Explore" },
   ];
 
   const toggleMenu = () => setShowMenu((prev) => !prev);
@@ -94,7 +96,8 @@ const Header = () => {
         to: "/messages",
         icon: <FaMessage />,
         label: "Messages",
-      }
+      },
+      { to: "send-archive", icon: <FaArchive />, label: "Submit archive" }
     );
   if (user) {
     dropdownLinks.push({
@@ -143,9 +146,6 @@ const Header = () => {
         <Link to="/" className="logo-link">
           <img src="/logo.jpg" alt="DSDHJ" width={50} height={50} />
         </Link>
-        <button className="menu-toggle" onClick={toggleMenu}>
-          {!isWide && <FaBars size={20} />}
-        </button>
 
         {showMenu && (
           <div
@@ -206,6 +206,10 @@ const Header = () => {
         )}
       </div>
       <div className="header-right">
+        <button className="menu-toggle" onClick={toggleMenu}>
+          {!isWide && <MenuIcon />}
+        </button>
+
         {isWide && (
           <nav className="desktop-nav">
             {navLinks.map((link) => (
@@ -235,8 +239,8 @@ const Header = () => {
           )}
           {user?.firstname && (
             <span className="user-firstname">
-              {user.firstname.length > 10
-                ? user.firstname.slice(0, 10) + "..."
+              {user.firstname.length > 7
+                ? user.firstname.slice(0, 6) + "..."
                 : user.firstname}
             </span>
           )}

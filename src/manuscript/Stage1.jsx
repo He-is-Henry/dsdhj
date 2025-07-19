@@ -2,16 +2,11 @@ import { useAuth } from "../context/UserContext";
 
 const Stage1 = ({ data, updateForm, nextStage }) => {
   const { user } = useAuth();
-  console.log("Does user roles include admin?", user?.roles.includes("admin"));
-  console.log("does the data currently have an id?", data._id);
-  console.log(
-    "does user own the manuscript?",
-    data.author.toString() === user?._id.toString()
-  );
+
   const isReadOnly =
     !user?.roles.includes("admin") && //is not an admin, only admins and editors are allowed, therefore, this is an editor
     data._id && //data has an id, meaning, they're currently about to edit
-    data.author.toString() !== user?._id.toString(); //user doesn't own the manuscript
+    data?.author?.toString() !== user?._id.toString(); //user doesn't own the manuscript
 
   return (
     <form

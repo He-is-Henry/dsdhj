@@ -6,13 +6,17 @@ const styles = {
     maxWidth: "900px",
     margin: "auto",
     fontFamily: "system-ui, sans-serif",
+    textAlign: "left",
   },
   heading: {
     fontSize: "2rem",
     color: "#1e3a8a",
     marginBottom: "1rem",
+    textAlign: "center",
   },
   subheading: {
+    textAlign: "center",
+
     fontSize: "1.3rem",
     marginBottom: "1rem",
     color: "#1e3a8a",

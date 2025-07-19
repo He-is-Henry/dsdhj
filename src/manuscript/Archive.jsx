@@ -1,70 +1,45 @@
-import React, { useEffect, useState } from "react";
-import ManuscriptPreview from "./ManuscriptPreview";
+import { useEffect, useState } from "react";
+import ArchiveDetails from "./ArchiveDetails";
 import axios from "../api/axios";
 
 const Archive = () => {
   const [archive, setArchive] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getArchive = async () => {
-      const { data } = await axios.get("published/archive");
+      const { data } = await axios.get("/archives");
       setArchive(data);
       setLoading(false);
     };
     getArchive();
   }, []);
-  const grouped = archive.reduce((acc, manuscript) => {
-    const volume = manuscript.volume ?? 0;
-    const issue = manuscript.issue ?? 0;
 
-    if (!acc[volume]) acc[volume] = {};
-    if (!acc[volume][issue]) acc[volume][issue] = [];
-
-    acc[volume][issue].push(manuscript);
-    return acc;
-  }, {});
-
-  const sortedVolumeKeys = Object.keys(grouped)
-    .map(Number)
-    .sort((a, b) => b - a);
-
-  const structured = sortedVolumeKeys.map((volume) => {
-    const issueGroups = grouped[volume];
-    const sortedIssues = Object.keys(issueGroups)
-      .map(Number)
-      .sort((a, b) => a - b);
-
-    return {
-      volume,
-      year: 2021 + volume,
-      issues: sortedIssues.map((issue) => ({
-        issue,
-        manuscripts: issueGroups[issue],
-      })),
-    };
+  const sorted = [...archive].sort((a, b) => {
+    // Sort by volume descending, then issue ascending
+    if (b.volume !== a.volume) return b.volume - a.volume;
+    return a.issue - b.issue;
   });
+
   if (loading) return <p>Loading...</p>;
-  if (!archive.length) return <p>Nothing to show </p>;
+  if (!archive.length) return <p>Nothing to show</p>;
   return (
-    <div className="archive-grouped">
-      {structured.map(({ year, volume, issues }) => (
-        <section key={volume} className="volume-group">
-          <h2 className="volume-year">{year}</h2>
-          {issues.map(({ issue, manuscripts }) => (
-            <div key={issue} className="issue-group">
-              <h3 className="issue-title">Issue {issue}</h3>
-              <div className="manuscript-list">
-                {manuscripts.map((manuscript) => (
-                  <ManuscriptPreview
-                    key={manuscript._id}
-                    manuscript={manuscript}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </section>
-      ))}
+    <div className="archive-flat">
+      <h2>
+        <u>Archive</u>
+      </h2>
+      {sorted.map((archive) => {
+        const { _id, volume, issue } = archive;
+        const year = 2022 + (volume ?? 0);
+        return (
+          <section key={_id} className="archive-entry">
+            <h3 className="archive-header">
+              Volume {volume} • Issue {issue} • {year}
+            </h3>
+            <ArchiveDetails file={archive.file} />
+          </section>
+        );
+      })}
     </div>
   );
 };

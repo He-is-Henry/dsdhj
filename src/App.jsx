@@ -30,10 +30,14 @@ import VerifyReset from "./users/VerifyReset";
 import ManuscriptView from "./manuscript/ManuscriptView";
 import PaymentPage from "./manuscript/PaymentPage";
 import AdminMessages from "./users/AdminMessages";
+import SubmitArchive from "./users/SubmitArchive";
+import ManuscriptList from "./manuscript/ManuscriptList";
+import EditorialBoard from "./components/EditorialBoard";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Header />
       <main>
         <Routes>
@@ -59,10 +63,13 @@ function App() {
             <Route path="/issuing" element={<Issuing />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+            <Route path="send-archive" element={<SubmitArchive />} />
             <Route path="/issuing" element={<Issuing />} />
             <Route path="/users" element={<UsersList />} />
             <Route path="/invite" element={<InviteUser />} />
           </Route>
+          <Route path="/editorial-board" element={<EditorialBoard />} />
+          <Route path="/recent-uploads" element={<ManuscriptList />} />
           <Route path="send-reset" element={<SendReset />} />
           <Route path="/pay/:id" element={<PaymentPage />} />
           <Route path="/invite/:token" element={<CompleteInvite />} />
@@ -70,7 +77,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/ethics" element={<Ethics />} />
-          <Route path="/manuscript" element={<ManuscriptView />} />
+          <Route path="/manuscript/:id" element={<ManuscriptView />} />
           <Route path="/author-guidelines" element={<AuthorGuidelines />} />
           <Route path="/issue" element={<CurrentIssue />} />
           <Route path="/archive" element={<Archive />} />
@@ -86,7 +93,8 @@ function App() {
           }}
         />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
 

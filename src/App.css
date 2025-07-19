@@ -3,7 +3,6 @@
 }
 #root {
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
   padding: 20px;
@@ -12,7 +11,8 @@
 body {
   margin: 0;
   width: 100%;
-  font-family: "Segoe UI", sans-serif;
+  overflow-x: hidden;
+  font-family: sans-serif;
   background-color: hsl(214, 100%, 99%);
   color: #093238;
 }
@@ -20,12 +20,14 @@ body {
 main {
   margin-top: 100px;
   min-width: 100%;
-  max-width: 800px;
   height: calc(100vh - 100px);
+  flex: 1;
 }
+
 .site-header {
   display: flex;
   position: fixed;
+  border-bottom: 3px solid #1d53a0;
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
@@ -36,15 +38,6 @@ main {
   left: 0;
   z-index: 1000;
 }
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 51, 102, 0.1);
-}
 
 .header-container {
   display: flex;
@@ -53,6 +46,24 @@ main {
   padding: 1rem 2rem;
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.custom-heading {
+  position: relative;
+  display: inline-block;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.custom-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 130%;
+  height: 5px;
+  background-color: #1e3a8a;
+  z-index: -1;
 }
 
 .header-left {
@@ -67,7 +78,6 @@ main {
   object-fit: contain;
 }
 
-/* Only visible when screen is small */
 .menu-toggle {
   background: none;
   border: none;
@@ -86,7 +96,6 @@ main {
   }
 }
 
-/* Desktop nav links */
 .desktop-nav {
   display: flex;
   gap: 1.5rem;
@@ -107,7 +116,6 @@ main {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   position: relative;
   cursor: pointer;
 }
@@ -118,7 +126,6 @@ main {
   position: relative;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px;
 }
 
 .avatar-img {
@@ -809,4 +816,18 @@ textarea {
 
 .btn-green {
   background-color: #28a745;
+}
+
+.manuscript-list {
+  text-align: left;
+  padding: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #007bff;
+  padding: 10px;
+  position: sticky;
+  max-width: 800px;
 }

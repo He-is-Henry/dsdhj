@@ -10,7 +10,7 @@ const Stage3 = ({ data, updateForm, nextStage, prevStage }) => {
   const isReadOnly =
     !user?.roles.includes("admin") && //is not an admin, only admins and editors are allowed, therefore, this is an editor
     data._id && //data has an id, meaning, they're currently about to edit
-    data.author.toString() !== user?._id.toString(); //user doesn't own the manuscript
+    data?.author?.toString() !== user?._id.toString(); //user doesn't own the manuscript
 
   const addCoAuthor = () => {
     updateForm("coAuthors", [
