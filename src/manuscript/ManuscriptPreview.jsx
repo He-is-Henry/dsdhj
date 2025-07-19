@@ -22,6 +22,9 @@ const ManuscriptPreview = ({ manuscript }) => {
     <div
       className="manuscript-preview"
       style={{
+        maxWidth: "500px",
+        display: "flex",
+        flexDirection: "column",
         borderRadius: "10px",
         marginBottom: "1.5rem",
       }}
@@ -48,7 +51,6 @@ const ManuscriptPreview = ({ manuscript }) => {
           {manuscript.type}
         </span>
       </div>
-
       <h3
         style={{ color: "#093238", fontSize: "1.2rem", marginBottom: "0.5rem" }}
       >
@@ -63,17 +65,24 @@ const ManuscriptPreview = ({ manuscript }) => {
       <p style={{ marginBottom: "0.75rem", color: "#333" }}>
         <strong>Author(s):</strong> {authorDisplay}
       </p>
-      <Link
-        to={`/manuscript/${manuscript._id}`}
-        style={{
-          color: "#1e3a8a",
-          fontWeight: "600",
-          textDecoration: "none",
-          borderBottom: "1px solid #1e3a8a",
-        }}
-      >
-        View Abstract →
-      </Link>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Link
+          to={`/manuscript/${manuscript._id}`}
+          style={{
+            display: "inline",
+            color: "#1e3a8a",
+            fontWeight: "600",
+            textDecoration: "none",
+            borderBottom: "1px solid #1e3a8a",
+          }}
+        >
+          View Abstract →
+        </Link>
+        <span>
+          <strong>View(s): </strong>
+          {manuscript.views}
+        </span>
+      </div>
     </div>
   );
 };

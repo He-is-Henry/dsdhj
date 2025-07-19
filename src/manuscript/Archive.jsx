@@ -16,7 +16,6 @@ const Archive = () => {
   }, []);
 
   const sorted = [...archive].sort((a, b) => {
-    // Sort by volume descending, then issue ascending
     if (b.volume !== a.volume) return b.volume - a.volume;
     return a.issue - b.issue;
   });

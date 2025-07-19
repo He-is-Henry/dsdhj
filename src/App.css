@@ -15,6 +15,7 @@ body {
   font-family: sans-serif;
   background-color: hsl(214, 100%, 99%);
   color: #093238;
+  min-height: 100vh;
 }
 
 main {
@@ -823,11 +824,23 @@ textarea {
   padding: 20px;
 }
 
-.search-input {
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 2px;
   border: 1px solid #007bff;
   padding: 10px;
   position: sticky;
   max-width: 800px;
+  outline: 1px solid #007bff;
+}
+.search-input {
+  width: 100%;
+  position: sticky;
+  position: absolute;
+  max-width: 500px;
+  outline: none;
+  border: none;
 }

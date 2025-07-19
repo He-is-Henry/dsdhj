@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import ManuscriptPreview from "./ManuscriptPreview";
 import Fuse from "fuse.js";
+import { FaSearch } from "react-icons/fa";
 
 const ManuscriptList = () => {
   const [manuscripts, setManuscripts] = useState([]);
@@ -38,14 +39,26 @@ const ManuscriptList = () => {
   }, [query, manuscripts]);
 
   return (
-    <>
-      <input
-        type="text"
-        className="search-input"
-        placeholder="SEARCH ARTICLE..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+    <div
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+      }}
+    >
+      <div className="search-container">
+        <input
+          type="text"
+          id="search"
+          className="search-input"
+          placeholder="SEARCH ARTICLE..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <label htmlFor="search">
+          {" "}
+          <FaSearch />
+        </label>
+      </div>
       <div className="manuscript-list">
         {results.length ? (
           results.map((manuscript) => (
@@ -55,7 +68,7 @@ const ManuscriptList = () => {
           <p>No matching manuscripts found.</p>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
