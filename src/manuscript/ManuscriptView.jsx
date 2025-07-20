@@ -51,6 +51,7 @@ const ManuscriptView = () => {
     volume,
     issue,
     createdAt,
+    submittedOn,
     abstract,
     keywords,
     references,
@@ -113,6 +114,9 @@ const ManuscriptView = () => {
         ""
       )}
 
+      <p>
+        <strong>Submitted on:</strong> {formatDate(submittedOn)}
+      </p>
       <p>
         <strong>Published on:</strong> {formatDate(createdAt)}
       </p>
