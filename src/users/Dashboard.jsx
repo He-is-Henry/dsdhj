@@ -38,7 +38,9 @@ const Dashboard = () => {
     <p>No Submissions Yet</p>
   );
 
-  const published = manuscripts.length ? (
+  const published = loading ? (
+    ""
+  ) : publishedManuscripts.length ? (
     publishedManuscripts
       .slice()
       .reverse()
