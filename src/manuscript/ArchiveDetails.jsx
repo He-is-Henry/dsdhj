@@ -1,6 +1,6 @@
 import { getPdfUrl } from "../components/supabaseUpload";
 
-const backendBase = "https://dsdhj-api.onrender.com";
+const backendBase = "https://api.dsdhj.ng";
 
 const ArchiveDetails = ({ file }) => {
   if (!file) return null;

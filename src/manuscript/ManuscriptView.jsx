@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 
-const backendBase = "https://dsdhj-api.onrender.com";
+const backendBase = "https://api.dsdhj.ng";
 
 const formatDate = (isoString) => {
   try {
