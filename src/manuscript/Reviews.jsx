@@ -3,6 +3,7 @@ import axios from "../api/axios";
 import { useAuth } from "../context/UserContext";
 import ReviewItem from "./ReviewItem";
 import toast from "react-hot-toast";
+import SEO from "../components/Seo";
 
 const Reviews = () => {
   const { user } = useAuth();
@@ -39,36 +40,43 @@ const Reviews = () => {
   };
 
   return (
-    <div className="reviews-page">
-      <h2>User Reviews</h2>
+    <>
+      <SEO
+        title="Submit a Review – Delta State Dental And Health Journal"
+        path="/reviews"
+        description="Reviewers can submit their evaluations of manuscripts assigned to them for the Delta State Dental And Health Journal. Please ensure all feedback is thorough and constructive."
+      />
+      <div className="reviews-page">
+        <h2>User Reviews</h2>
 
-      {user && (
-        <form onSubmit={handleSubmit} className="review-form">
-          <textarea
-            rows="4"
-            value={text}
-            maxLength={300}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Write your review..."
-          />
-          <button type="submit">Submit Review</button>
-        </form>
-      )}
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="review-list">
-          {reviews.map((review) => (
-            <ReviewItem
-              key={review._id}
-              review={review}
-              refresh={fetchReviews}
+        {user && (
+          <form onSubmit={handleSubmit} className="review-form">
+            <textarea
+              rows="4"
+              value={text}
+              maxLength={300}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Write your review..."
             />
-          ))}
-        </div>
-      )}
-    </div>
+            <button type="submit">Submit Review</button>
+          </form>
+        )}
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="review-list">
+            {reviews.map((review) => (
+              <ReviewItem
+                key={review._id}
+                review={review}
+                refresh={fetchReviews}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

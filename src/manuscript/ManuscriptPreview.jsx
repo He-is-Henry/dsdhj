@@ -7,6 +7,7 @@ function formatManuscriptID(id) {
   return `${prefix}-${year}-${number}`;
 }
 const infoStyle = {
+  whiteSpace: "nowrap",
   color: "#fff",
   backgroundColor: "#1d53a0",
   padding: "10px 20px",
@@ -27,6 +28,7 @@ const ManuscriptPreview = ({ manuscript }) => {
         flexDirection: "column",
         borderRadius: "10px",
         marginBottom: "1.5rem",
+        margin: "10px 0",
       }}
     >
       <div
@@ -42,8 +44,8 @@ const ManuscriptPreview = ({ manuscript }) => {
         <span style={infoStyle}>issue {manuscript.issue}</span>
         <span
           style={{
-            marginLeft: "30px",
-            whiteSpace: "nowrap",
+            marginLeft: "20px",
+            whiteSpace: "wrap",
             color: "#1d53a0",
             fontWeight: "bold",
           }}
@@ -65,7 +67,13 @@ const ManuscriptPreview = ({ manuscript }) => {
       <p style={{ marginBottom: "0.75rem", color: "#333" }}>
         <strong>Author(s):</strong> {authorDisplay}
       </p>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+        }}
+      >
         <Link
           to={`/manuscript/${manuscript._id}`}
           style={{

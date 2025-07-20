@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../api/axios";
+import SEO from "./Seo";
 
 const styles = {
   section: {
@@ -89,7 +90,7 @@ const styles = {
   },
 };
 
-const Contact = () => {
+const Contact = ({ home = false }) => {
   const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -128,91 +129,100 @@ const Contact = () => {
   const onMessageChange = (e) => setMessage(e.target.value);
 
   return (
-    <section style={styles.section}>
-      <h2 style={styles.heading}>Contact Us</h2>
-      <p style={styles.text}>
-        For inquiries, feedback, or correspondence, please reach out to the
-        Delta State Dental and Health Journal:
-      </p>
+    <>
+      {!home && (
+        <SEO
+          title="Contact Us – Delta State Dental And Health Journal"
+          path="/contact"
+          description="Get in touch with the Delta State Dental And Health Journal editorial team. We welcome inquiries from authors, reviewers, and readers."
+        />
+      )}
+      <section style={styles.section}>
+        <h2 style={styles.heading}>Contact Us</h2>
+        <p style={styles.text}>
+          For inquiries, feedback, or correspondence, please reach out to the
+          Delta State Dental and Health Journal:
+        </p>
 
-      <ul style={styles.list}>
-        <li>
-          <strong>Phone:</strong>{" "}
-          <a href="tel:+2348012345678" style={styles.link}>
-            +234 801 234 5678
-          </a>
-        </li>
-        <li>
-          <strong>Email:</strong>{" "}
-          <a href="mailto:dsdhj.dev@gmail.com" style={styles.link}>
-            dsdhj.dev@gmail.com
-          </a>
-        </li>
-        <li>
-          <strong>Address:</strong> Delta State University, Abraka, Nigeria.
-        </li>
-      </ul>
+        <ul style={styles.list}>
+          <li>
+            <strong>Phone:</strong>{" "}
+            <a href="tel:+2348012345678" style={styles.link}>
+              +234 801 234 5678
+            </a>
+          </li>
+          <li>
+            <strong>Email:</strong>{" "}
+            <a href="mailto:dsdhj.dev@gmail.com" style={styles.link}>
+              dsdhj.dev@gmail.com
+            </a>
+          </li>
+          <li>
+            <strong>Address:</strong> Delta State University, Abraka, Nigeria.
+          </li>
+        </ul>
 
-      <div style={styles.card}>
-        <h3 style={styles.subheading}>Send us a message</h3>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="firstname" style={styles.label}>
-            First Name:
-          </label>
-          <input
-            required
-            type="text"
-            id="firstname"
-            value={firstname}
-            onChange={onFirstNameChange}
-            style={styles.input}
-          />
+        <div style={styles.card}>
+          <h3 style={styles.subheading}>Send us a message</h3>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="firstname" style={styles.label}>
+              First Name:
+            </label>
+            <input
+              required
+              type="text"
+              id="firstname"
+              value={firstname}
+              onChange={onFirstNameChange}
+              style={styles.input}
+            />
 
-          <label htmlFor="lastname" style={styles.label}>
-            Last Name:
-          </label>
-          <input
-            required
-            type="text"
-            id="lastname"
-            value={lastname}
-            onChange={onLastNameChange}
-            style={styles.input}
-          />
+            <label htmlFor="lastname" style={styles.label}>
+              Last Name:
+            </label>
+            <input
+              required
+              type="text"
+              id="lastname"
+              value={lastname}
+              onChange={onLastNameChange}
+              style={styles.input}
+            />
 
-          <label htmlFor="email" style={styles.label}>
-            Email:
-          </label>
-          <input
-            required
-            type="email"
-            id="email"
-            value={email}
-            onChange={onEmailChange}
-            style={styles.input}
-          />
+            <label htmlFor="email" style={styles.label}>
+              Email:
+            </label>
+            <input
+              required
+              type="email"
+              id="email"
+              value={email}
+              onChange={onEmailChange}
+              style={styles.input}
+            />
 
-          <label htmlFor="message" style={styles.label}>
-            Message:
-          </label>
-          <textarea
-            required
-            id="message"
-            rows={6}
-            value={message}
-            onChange={onMessageChange}
-            style={styles.textarea}
-          ></textarea>
+            <label htmlFor="message" style={styles.label}>
+              Message:
+            </label>
+            <textarea
+              required
+              id="message"
+              rows={6}
+              value={message}
+              onChange={onMessageChange}
+              style={styles.textarea}
+            ></textarea>
 
-          {errorMsg && <p style={styles.error}>{errorMsg}</p>}
-          {msg && <p style={styles.success}>{msg}</p>}
+            {errorMsg && <p style={styles.error}>{errorMsg}</p>}
+            {msg && <p style={styles.success}>{msg}</p>}
 
-          <button type="submit" style={styles.button} disabled={loading}>
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      </div>
-    </section>
+            <button type="submit" style={styles.button} disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </div>
+      </section>
+    </>
   );
 };
 

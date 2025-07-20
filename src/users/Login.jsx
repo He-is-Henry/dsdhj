@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { useAuth } from "../context/UserContext";
+import SEO from "../components/Seo";
 
 const styles = {
   form: {
@@ -88,55 +89,61 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={styles.form}>
-      <h2>Login</h2>
-
-      {error && <p style={styles.error}>{error}</p>}
-
-      <input
-        type="text"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        style={styles.input}
-        required
+    <>
+      <SEO
+        title="Login – Delta State Dental And Health Journal"
+        path="/login"
       />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
-        style={styles.input}
-        required
-      />
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h2>Login</h2>
 
-      <button type="submit" style={styles.button}>
-        {loading ? "Logging in..." : "Login"}
-      </button>
+        {error && <p style={styles.error}>{error}</p>}
 
-      <p>
-        Don’t have an account?{" "}
-        <button
-          type="button"
-          onClick={() => navigate("/signup", { state: { from } })}
-          style={styles.linkBtn}
-        >
-          Create one
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={styles.input}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          style={styles.input}
+          required
+        />
+
+        <button type="submit" style={styles.button}>
+          {loading ? "Logging in..." : "Login"}
         </button>
-      </p>
 
-      <p>
-        <button
-          type="button"
-          onClick={() => navigate("/send-reset", { state: { from } })}
-          style={styles.linkBtn}
-        >
-          Forgotten password?
-        </button>
-      </p>
-    </form>
+        <p>
+          Don’t have an account?{" "}
+          <button
+            type="button"
+            onClick={() => navigate("/signup", { state: { from } })}
+            style={styles.linkBtn}
+          >
+            Create one
+          </button>
+        </p>
+
+        <p>
+          <button
+            type="button"
+            onClick={() => navigate("/send-reset", { state: { from } })}
+            style={styles.linkBtn}
+          >
+            Forgotten password?
+          </button>
+        </p>
+      </form>
+    </>
   );
 };
 

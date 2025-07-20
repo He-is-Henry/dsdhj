@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ManuscriptExcerpt = ({ manuscript }) => {
   const { title, name, status, type, createdAt } = manuscript;
-
   const dateStr = createdAt?.$date || createdAt;
 
   return (
@@ -45,23 +44,24 @@ const ManuscriptExcerpt = ({ manuscript }) => {
           View Full Details
         </button>
       </Link>
-      {manuscript.status === "accepted" && (
-        <Link to={`/pay/${manuscript._id}`}>
-          <button
-            style={{
-              margin: "0.5rem",
-              padding: "0.4rem 0.8rem",
-              background: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Pay now
-          </button>
-        </Link>
-      )}
+      {manuscript.status === "accepted" &&
+        !location.pathname.includes("manuscripts") && (
+          <Link to={`/pay/${manuscript._id}`}>
+            <button
+              style={{
+                margin: "0.5rem",
+                padding: "0.4rem 0.8rem",
+                background: "#007bff",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Pay now
+            </button>
+          </Link>
+        )}
     </div>
   );
 };

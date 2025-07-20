@@ -1,7 +1,18 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
-const backendBase = "https://dsdhj-api.onrender.com/";
+
+const backendBase = "https://dsdhj-api.onrender.com";
+
+const formatDate = (isoString) => {
+  try {
+    return new Date(isoString).toLocaleDateString("en-GB", {
+      dateStyle: "long",
+    });
+  } catch {
+    return isoString;
+  }
+};
 
 const ManuscriptView = () => {
   const { id } = useParams();
@@ -11,93 +22,139 @@ const ManuscriptView = () => {
   const [isPdfFile, setIsPDFFile] = useState(undefined);
 
   useEffect(() => {
-    if (!manuscript) return;
-    setIsPDFFile(!/\.\w{3,4}$/.test(manuscript.file));
-  }, [manuscript]);
-
-  useEffect(() => {
     const getManuscript = async () => {
       try {
         setLoading(true);
         const response = await axios.get(`/published/${id}`);
-        console.log(response);
         setManuscript(response.data);
+        setIsPDFFile(!/\.\w{3,4}$/.test(response.data.file));
       } catch (err) {
-        setErrMsg(err?.response?.data?.error || "Failed to get manuscript");
-        console.log(err);
+        setErrMsg(err?.response?.data?.error || "Failed to load manuscript.");
       } finally {
         setLoading(false);
       }
     };
     getManuscript();
-  }, []);
-  if (!manuscript) return <p>Manuscript not found.</p>;
-  console.log(manuscript.file);
+  }, [id]);
 
-  const allAuthors = [manuscript.name, ...(manuscript.coauthors || [])];
+  if (loading) return <p>Loading manuscript...</p>;
+  if (errMsg) return <p>{errMsg}</p>;
+  if (!manuscript?.title) return <p>Manuscript not found.</p>;
+
+  const {
+    title,
+    name,
+    coauthors,
+    affiliation,
+    country,
+    discipline,
+    volume,
+    issue,
+    createdAt,
+    abstract,
+    keywords,
+    references,
+    views,
+    file,
+  } = manuscript;
+
+  const allAuthors = [name, ...(coauthors || [])];
   const authorDisplay =
     allAuthors.length > 10 ? `${allAuthors[0]} et al.` : allAuthors.join(", ");
-  if (loading) return <p>Loading...</p>;
-  if (errMsg) return <p> {errMsg}</p>;
+
+  const googleDocsPreviewUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
+    file
+  )}&embedded=true`;
 
   return (
-    <div style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto" }}>
-      <h2>{manuscript.title}</h2>
+    <div
+      className="manuscript-public"
+      style={{
+        padding: "1.5rem",
+        maxWidth: "800px",
+        margin: "auto",
+        textAlign: "left",
+      }}
+    >
+      <h2 style={{ marginBottom: "0.5rem" }}>{title}</h2>
+
       <p>
         <strong>Authors:</strong> {authorDisplay}
       </p>
-      {manuscript.affiliation && (
+
+      {affiliation && (
         <p>
-          <strong>Affiliation:</strong> {manuscript.affiliation}
+          <strong>Affiliation:</strong> {affiliation}
         </p>
       )}
+      {country && (
+        <p>
+          <strong>Country:</strong> {country}
+        </p>
+      )}
+      {discipline && (
+        <p>
+          <strong>Discipline:</strong> {discipline}
+        </p>
+      )}
+
+      {(volume || issue) && (
+        <p>
+          <strong>Journal Issue:</strong> {volume && `Vol. ${volume}`}{" "}
+          {issue && `Issue ${issue}`}
+        </p>
+      )}
+
+      {keywords?.length ? (
+        <p>
+          <strong>Keywords:</strong> {keywords.join(", ")}
+        </p>
+      ) : (
+        ""
+      )}
+
       <p>
-        <strong>Abstract:</strong>
+        <strong>Published on:</strong> {formatDate(createdAt)}
       </p>
-      <p style={{ lineHeight: "1.6" }}>{manuscript.abstract}</p>
       <p>
-        {" "}
-        <strong>Views: </strong>
-        {manuscript.views}
+        <strong>Views:</strong> {views}
       </p>
+
+      <div style={{ marginTop: "1.5rem" }}>
+        <h4>Abstract</h4>
+        <p style={{ lineHeight: "1.7", marginBottom: "1rem" }}>{abstract}</p>
+      </div>
+
+      {references && (
+        <div style={{ marginTop: "1.5rem" }}>
+          <h4>References</h4>
+          <div
+            style={{ lineHeight: "1.6" }}
+            dangerouslySetInnerHTML={{
+              __html: references.replace(/\n/g, "<br/>"),
+            }}
+          />
+        </div>
+      )}
+
       <div style={{ marginTop: "2rem" }}>
         <a
-          href={
-            isPdfFile
-              ? `${backendBase}/files/download?url=${manuscript.file}`
-              : manuscript.file
-          }
+          href={isPdfFile ? `${backendBase}/files/download?url=${file}` : file}
           target="_blank"
           rel="noopener noreferrer"
-          style={{
-            display: "inline-block",
-            padding: "0.6rem 1.2rem",
-            backgroundColor: "#1e3a8a",
-            color: "#fff",
-            textDecoration: "none",
-            borderRadius: "5px",
-            fontWeight: "bold",
-          }}
+          className="blue-button"
         >
           Download Full Paper
         </a>
+
         <a
-          href={`https://docs.google.com/viewer?url=${encodeURIComponent(
-            manuscript.file
-          )}&embedded=true`}
+          href={googleDocsPreviewUrl}
           target="_blank"
-          style={{
-            display: "inline-block",
-            padding: "0.6rem 1.2rem",
-            margin: "20px",
-            backgroundColor: "#1e3a8a",
-            color: "#fff",
-            textDecoration: "none",
-            borderRadius: "5px",
-            fontWeight: "bold",
-          }}
+          rel="noopener noreferrer"
+          className="blue-button"
+          style={{ marginLeft: "1rem" }}
         >
-          View
+          View Online
         </a>
       </div>
     </div>

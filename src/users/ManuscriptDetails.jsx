@@ -195,7 +195,12 @@ const ManuscriptDetails = () => {
         <strong>Abstract:</strong> {abstract}
       </p>
       <p>
-        <strong>References:</strong> {references}
+        <strong>References:</strong>{" "}
+        <span
+          dangerouslySetInnerHTML={{
+            __html: references.replace(/\n/g, "<br/>"),
+          }}
+        />
       </p>
 
       <div style={{ marginTop: "1rem" }}>
@@ -223,7 +228,9 @@ const ManuscriptDetails = () => {
         <button className="blue-button" onClick={() => setShowHistory(true)}>
           View Edit History
         </button>
-        <button onClick={handleDelete}>Delete Manuscript</button>
+        <button onClick={handleDelete} style={{ color: "white" }}>
+          Delete Manuscript
+        </button>
       </div>
 
       {showHistory && (

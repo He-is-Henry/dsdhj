@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
+import SEO from "../components/Seo";
 
 const styles = {
   container: {
@@ -94,74 +95,80 @@ const Signup = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Sign up as an author</h2>
+    <>
+      <SEO
+        title="Create Account – Delta State Dental And Health Journal"
+        path="/signup"
+      />
+      <div style={styles.container}>
+        <h2>Sign up as an author</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label>First Name:</label>
-        <input
-          name="firstname"
-          value={form.firstname}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+        <form onSubmit={handleSubmit}>
+          <label>First Name:</label>
+          <input
+            name="firstname"
+            value={form.firstname}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-        <label>Last Name:</label>
-        <input
-          name="lastname"
-          value={form.lastname}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+          <label>Last Name:</label>
+          <input
+            name="lastname"
+            value={form.lastname}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          name="confirm"
-          value={form.confirm}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
+          <label>Confirm Password:</label>
+          <input
+            type="password"
+            name="confirm"
+            value={form.confirm}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-        <button type="submit" style={styles.button}>
-          Create Account
-        </button>
-
-        <p style={{ marginTop: "1rem" }}>
-          Already have an account?{" "}
-          <button
-            type="button"
-            onClick={() => navigate("/login", { state: { from } })}
-            style={styles.linkBtn}
-          >
-            Login
+          <button type="submit" style={styles.button}>
+            Create Account
           </button>
-        </p>
-      </form>
-    </div>
+
+          <p style={{ marginTop: "1rem" }}>
+            Already have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/login", { state: { from } })}
+              style={styles.linkBtn}
+            >
+              Login
+            </button>
+          </p>
+        </form>
+      </div>
+    </>
   );
 };
 
