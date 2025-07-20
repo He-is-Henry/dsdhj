@@ -11,13 +11,14 @@ const Dashboard = () => {
   useEffect(() => {
     const getUserManuscripts = async () => {
       try {
+        console.log("OK");
         const response = await axios.get("/manuscripts");
         console.log(response.data);
         setManuscripts(response.data.manuscripts);
         setPublishedManuscripts(response.data.publishedManuscripts);
-        setLoading(false);
       } catch (err) {
         console.error(err);
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -48,7 +49,7 @@ const Dashboard = () => {
         <ManuscriptExcerpt key={i} manuscript={manuscript} />
       ))
   ) : (
-    <p>No Submissions Yet</p>
+    <p>No Publishes Yet</p>
   );
   console.log(content);
   return (
