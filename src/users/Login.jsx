@@ -81,6 +81,7 @@ const Login = () => {
 
       navigate(from, { replace: true });
     } catch (err) {
+      if (err?.response) return setError("No server response");
       const message = err.response?.data?.error || "Login failed";
       setError(message);
     } finally {
