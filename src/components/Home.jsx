@@ -18,18 +18,30 @@ const Home = () => {
         description="Delta State Dental And Health Journal publishes peer-reviewed open access research in dental, medical, and health sciences. Explore current issues, archives, and submission guidelines."
       />
       <div>
-        <img
-          src="/hero.jpg"
-          alt="Hero Image"
-          style={{
-            width: "100vw",
-            marginTop: "-30px",
-            marginLeft: "-20px",
-            marginRight: "-20px",
-            objectFit: "cover",
-            maxHeight: "100vh",
-          }}
-        />
+        <div style={{ position: "relative" }}>
+          <img
+            src="/hero.jpg"
+            alt="Hero Image"
+            style={{
+              width: "100vw",
+              marginTop: "-30px",
+              marginLeft: "-20px",
+              marginRight: "-20px",
+              objectFit: "cover",
+              maxHeight: "100vh",
+            }}
+          />
+          <span
+            style={{
+              fontFamily: "Times New Roman, serif",
+              position: "absolute",
+              bottom: "10px",
+              left: "0",
+            }}
+          >
+            <b>ISSN: 0189-0786</b>
+          </span>
+        </div>
         <h2>
           <b>Delta State Dental And Health Journal</b>
         </h2>

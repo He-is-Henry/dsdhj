@@ -26,9 +26,9 @@ const Header = () => {
   const navigate = useNavigate();
   const dropdownLinks = [];
   const [showMenu, setShowMenu] = useState(false);
-  const [isWide, setIsWide] = useState(window.innerWidth > 768);
+  const [isWide, setIsWide] = useState(window.innerWidth > 900);
   useEffect(() => {
-    const handleResize = () => setIsWide(window.innerWidth > 768);
+    const handleResize = () => setIsWide(window.innerWidth > 900);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -181,10 +181,10 @@ const Header = () => {
             ref={dropdownRef}
             onMouseEnter={() => {
               clearDropdownTimeout();
-              window.innerWidth >= 768 && setShowDropdown(true);
+              isWide && setShowDropdown(true);
             }}
             onMouseLeave={() => {
-              window.innerWidth >= 768 && delayedHideDropdown();
+              isWide && delayedHideDropdown();
             }}
           >
             {dropdownLinks.map((item, index) =>

@@ -100,6 +100,7 @@ main {
 .desktop-nav {
   display: flex;
   gap: 1.5rem;
+  margin-right: 20px;
 }
 
 .nav-link {
@@ -111,7 +112,7 @@ main {
 }
 
 .nav-link:hover {
-  color: #1e9965;
+  color: #1d53a0;
 }
 
 .header-right {
@@ -443,7 +444,7 @@ textarea {
 }
 
 .drawer-link:hover {
-  color: #1e9965;
+  color: #1d53a0;
 }
 @keyframes shiftIn {
   to {
