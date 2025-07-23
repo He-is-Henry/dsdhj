@@ -35,8 +35,9 @@ const Home = () => {
             style={{
               fontFamily: "Times New Roman, serif",
               position: "absolute",
-              bottom: "10px",
+              bottom: "7px",
               left: "0",
+            
             }}
           >
             <b>ISSN: 0189-0786</b>
