@@ -35,8 +35,9 @@ const Home = () => {
             style={{
               fontFamily: "Times New Roman, serif",
               position: "absolute",
-              bottom: "7px",
+              bottom: "5px",
               left: "0",
+              color:blue;
             
             }}
           >
