@@ -198,7 +198,7 @@ const ManuscriptDetails = () => {
         <strong>References:</strong>{" "}
         <span
           dangerouslySetInnerHTML={{
-            __html: references.replace(/\n/g, "<br/>"),
+            __html: references?.replace(/\n/g, "<br/>"),
           }}
         />
       </p>
