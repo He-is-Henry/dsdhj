@@ -352,15 +352,6 @@ main {
   margin-top: 0.5rem;
 }
 
-.status-buttons .blue-button:hover {
-  background-color: #3b82f6;
-}
-
-.status-buttons .blue-button.active {
-  background-color: #2563eb;
-  font-weight: bold;
-}
-
 textarea {
   width: 100%;
   padding: 0.5rem;
@@ -474,6 +465,24 @@ textarea {
 .review-list {
   width: 100%;
 }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
 .review-form {
   position: fixed;
   bottom: 0;

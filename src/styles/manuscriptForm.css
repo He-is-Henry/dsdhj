@@ -110,7 +110,6 @@
   transform: translateY(-1px);
 }
 
-/* Modal and history list styles reused */
 .modal-overlay {
   position: fixed;
   top: 0;

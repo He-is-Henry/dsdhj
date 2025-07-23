@@ -8,6 +8,7 @@ const styles = {
     margin: "auto",
     fontFamily: "system-ui, sans-serif",
     textAlign: "left",
+    display: "grid",
   },
   heading: {
     fontSize: "2rem",
@@ -17,7 +18,6 @@ const styles = {
   },
   subheading: {
     textAlign: "center",
-
     fontSize: "1.3rem",
     marginBottom: "1rem",
     color: "#1e3a8a",
@@ -35,7 +35,7 @@ const styles = {
   link: {
     color: "#3b82f6",
     textDecoration: "none",
-    fontWeight: 500,
+    fontWeight: "500px",
   },
   card: {
     backgroundColor: "#f0f6ff",
@@ -46,7 +46,6 @@ const styles = {
     border: "1px solid #cbd5e1",
   },
   label: {
-    display: "block",
     marginBottom: "0.4rem",
     marginTop: "1rem",
     fontWeight: 600,
@@ -59,10 +58,12 @@ const styles = {
     border: "1px solid #cbd5e1",
     backgroundColor: "#ffffff",
     fontSize: "1rem",
+    maxWidth: "400px",
   },
   textarea: {
     resize: "none",
     width: "100%",
+    maxWidth: "400px",
     padding: "0.75rem",
     borderRadius: "8px",
     border: "1px solid #cbd5e1",
@@ -71,7 +72,7 @@ const styles = {
   },
   button: {
     marginTop: "1.5rem",
-    backgroundColor: "#1e3a8a", // dark blue
+    backgroundColor: "#1e3a8a",
     color: "#ffffff",
     padding: "0.8rem 1.5rem",
     border: "none",
@@ -165,53 +166,63 @@ const Contact = ({ home = false }) => {
         <div style={styles.card}>
           <h3 style={styles.subheading}>Send us a message</h3>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="firstname" style={styles.label}>
-              First Name:
-            </label>
-            <input
-              required
-              type="text"
-              id="firstname"
-              value={firstname}
-              onChange={onFirstNameChange}
-              style={styles.input}
-            />
+            <div className="form-grid">
+              <div>
+                <label htmlFor="firstname" style={styles.label}>
+                  First Name:
+                </label>
+                <input
+                  required
+                  type="text"
+                  id="firstname"
+                  value={firstname}
+                  onChange={onFirstNameChange}
+                  style={styles.input}
+                />
+              </div>
 
-            <label htmlFor="lastname" style={styles.label}>
-              Last Name:
-            </label>
-            <input
-              required
-              type="text"
-              id="lastname"
-              value={lastname}
-              onChange={onLastNameChange}
-              style={styles.input}
-            />
+              <div>
+                <label htmlFor="lastname" style={styles.label}>
+                  Last Name:
+                </label>
+                <input
+                  required
+                  type="text"
+                  id="lastname"
+                  value={lastname}
+                  onChange={onLastNameChange}
+                  style={styles.input}
+                />
+              </div>
 
-            <label htmlFor="email" style={styles.label}>
-              Email:
-            </label>
-            <input
-              required
-              type="email"
-              id="email"
-              value={email}
-              onChange={onEmailChange}
-              style={styles.input}
-            />
+              <div>
+                <label htmlFor="email" style={styles.label}>
+                  Email:
+                </label>
+                <input
+                  required
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={onEmailChange}
+                  style={styles.input}
+                />
+              </div>
 
-            <label htmlFor="message" style={styles.label}>
-              Message:
-            </label>
-            <textarea
-              required
-              id="message"
-              rows={6}
-              value={message}
-              onChange={onMessageChange}
-              style={styles.textarea}
-            ></textarea>
+              <div>
+                <label htmlFor="message" style={styles.label}>
+                  Message:
+                </label>
+                <textarea
+                  required
+                  id="message"
+                  rows={6}
+                  value={message}
+                  onChange={onMessageChange}
+                  style={styles.textarea}
+                ></textarea>
+              </div>
+            </div>
 
             {errorMsg && <p style={styles.error}>{errorMsg}</p>}
             {msg && <p style={styles.success}>{msg}</p>}
