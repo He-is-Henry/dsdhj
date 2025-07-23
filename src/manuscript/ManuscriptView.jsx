@@ -141,7 +141,7 @@ const ManuscriptView = () => {
         </div>
       )}
 
-      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+      <div style={{ marginTop: "2rem" }}>
         <a
           href={isPdfFile ? `${backendBase}/files/download?url=${file}` : file}
           target="_blank"
@@ -156,7 +156,7 @@ const ManuscriptView = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="blue-button"
-          style={{ marginLeft: "1rem" }}
+          style={{ marginLeft: "1rem", marginBottom: "1rem" }}
         >
           View Online
         </a>
