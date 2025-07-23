@@ -12,7 +12,7 @@ const ManuscriptList = () => {
   useEffect(() => {
     const getPublished = async () => {
       try {
-        const { data } = await axios.get("/published");
+        const { data } = await axios.get("/published/all");
         const reversed = data.reverse();
         setManuscripts(reversed);
         setResults(reversed);
