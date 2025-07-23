@@ -118,7 +118,7 @@ const EditorialBoard = () => {
               Association, Southern Maryland Dental Association
             </li>
             <li style={liStyle}>
-              <strong>Dr. (Mrs.) Faith Iwu</strong> — Mydentist Dental Practice,
+              <strong>Dr. (Mrs.) Faith Iwu</strong> — My Dentist Dental Practice,
               Doncaster, UK
             </li>
           </ul>
