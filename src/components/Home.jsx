@@ -37,7 +37,7 @@ const Home = () => {
               position: "absolute",
               bottom: "5px",
               right: "0",
-              color: "blue",
+              color: "#1D53A0",
             
             }}
           >
