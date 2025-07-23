@@ -36,7 +36,7 @@ const Home = () => {
               fontFamily: "Times New Roman, serif",
               position: "absolute",
               bottom: "5px",
-              left: "0",
+              right: "0",
               color:blue;
             
             }}
