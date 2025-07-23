@@ -37,8 +37,7 @@ const Home = () => {
               position: "absolute",
               bottom: "5px",
               right: "0",
-              color:blue;
-            
+              color: "blue",
             }}
           >
             <b>ISSN: 0189-0786</b>
