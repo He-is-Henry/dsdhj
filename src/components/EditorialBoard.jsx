@@ -114,7 +114,7 @@ const EditorialBoard = () => {
               Practice, Doncaster, UK
             </li>
             <li style={liStyle}>
-              <strong>Dr. Chingere Mabel Okoro</strong> — American Dental
+              <strong>Dr. Chinyere Mabel Okoro</strong> — American Dental
               Association, Southern Maryland Dental Association
             </li>
             <li style={liStyle}>
@@ -125,9 +125,15 @@ const EditorialBoard = () => {
         </div>
 
         <div>
-          <h3 style={subheadingStyle}>Editorial Assistant</h3>
+          <h3 style={subheadingStyle}>Editorial Assistants</h3>
           <p style={paragraphStyle}>
             <strong>Jones - Dibie Brenmound</strong>
+            <br />
+            Human Anatomy & Cell Biology, Delta State University, Abraka
+          </p>
+          
+            <p style={paragraphStyle}>
+            <strong>Nelson Ogboru Ejumedia</strong>
             <br />
             Human Anatomy & Cell Biology, Delta State University, Abraka
           </p>
