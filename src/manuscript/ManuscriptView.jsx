@@ -141,7 +141,7 @@ const ManuscriptView = () => {
         </div>
       )}
 
-      <div style={{ marginTop: "2rem" }}>
+      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
         <a
           href={isPdfFile ? `${backendBase}/files/download?url=${file}` : file}
           target="_blank"
