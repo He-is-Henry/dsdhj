@@ -35,7 +35,7 @@ const CurrentIssue = () => {
     getLastArchive();
   }, []);
   if (loading) return <p>Loading...</p>;
-  if (!currentIssueManuscripts.length) return <p>Nothing to show </p>;
+  
   return (
     <>
       <SEO
