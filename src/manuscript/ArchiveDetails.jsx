@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { getPdfUrl } from "../components/supabaseUpload";
 
 const backendBase = "https://api.dsdhj.ng";
 
 const ArchiveDetails = ({ file }) => {
-  if (!file) return null;
+  const [fullUrl, setFullUrl] = useState(null);
+  useState(() => {
+    const getUrl = async () => {
+      const url = await getPdfUrl(file);
+      setFullUrl(url);
+    };
 
-  const fullUrl = getPdfUrl(file);
+    getUrl()
+  }, []);
+
+  if (!file || !fullUrl) return null;
+
   const downloadUrl = `${backendBase}/files/download?url=${encodeURIComponent(
-    fullUrl
+    fullUrl,
   )}`;
 
   return (
