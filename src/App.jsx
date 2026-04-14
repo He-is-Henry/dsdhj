@@ -34,6 +34,7 @@ import SubmitArchive from "./users/SubmitArchive";
 import ManuscriptList from "./manuscript/ManuscriptList";
 import EditorialBoard from "./components/EditorialBoard";
 import Footer from "./components/Footer";
+import WakeSupbase from "./components/WakeSupbase";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           >
             <Route path="reset-password/:token" element={<VerifyReset />} />
             <Route path="/view/:manuscriptId" element={<ManuscriptDetails />} />
+            <Route path="/supabase" element={<WakeSupbase />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>

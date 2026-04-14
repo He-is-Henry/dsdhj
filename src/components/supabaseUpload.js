@@ -35,4 +35,17 @@ const getPdfUrl = (filePath) => {
   return publicUrl;
 };
 
-export { uploadPdf, deletePdf, getPdfUrl };
+const wakeSupabase = async () => {
+  const { data, error } = await supabase.storage
+    .from("archive")
+    .list("", { limit: 1 });
+
+  if (error) {
+    console.log("Wake error:", error.message);
+    return { error: error.message };
+  }
+
+  return { success: true };
+};
+
+export { uploadPdf, deletePdf, getPdfUrl, wakeSupabase };
