@@ -1,51 +1,51 @@
-import { supabase } from "../api/supabase";
+import axios from "../api/axios";
+const API = "/supabase";
 
 const uploadPdf = async (file) => {
   if (!file) return { error: "No file selected" };
 
-  const fileExt = file.name.split(".").pop();
-  const fileName = `${Date.now()}.${fileExt}`;
-  const filePath = `${fileName}`;
+  const formData = new FormData();
+  formData.append("file", file);
 
-  const { error: uploadError } = await supabase.storage
-    .from("archive")
-    .upload(filePath, file);
+  try {
+    const { data } = await axios.post(`${API}/upload`, formData);
 
-  if (uploadError) return { error: uploadError.message };
-
-  const { data } = supabase.storage.from("archive").getPublicUrl(filePath);
-  console.log(data);
-  const { publicUrl } = data;
-  console.log(publicUrl);
-  return { url: publicUrl, path: filePath };
+    return {
+      url: data.url,
+      path: data.path,
+    };
+  } catch (err) {
+    return {
+      error: err?.response?.data?.error || "Upload failed",
+    };
+  }
 };
 
 const deletePdf = async (filePath) => {
-  const response = await supabase.storage.from("archive").remove([filePath]);
-  console.log(response);
-  const { error } = response;
-  if (error) return { error: error.message };
-  return { success: true };
-};
+  try {
+    const { data } = await axios.post(`${API}/delete`, {
+      filePath,
+    });
 
-const getPdfUrl = (filePath) => {
-  const { data } = supabase.storage.from("archive").getPublicUrl(filePath);
-  console.log(data);
-  const { publicUrl } = data;
-  return publicUrl;
-};
+    if (data?.error) return { error: data.error };
 
-const wakeSupabase = async () => {
-  const { data, error } = await supabase.storage
-    .from("archive")
-    .list("", { limit: 1 });
-
-  if (error) {
-    console.log("Wake error:", error.message);
-    return { error: error.message };
+    return { success: true };
+  } catch (err) {
+    return {
+      error: err?.response?.data?.error || "Delete failed",
+    };
   }
+};
+const getPdfUrl = async (filePath) => {
+  try {
+    const { data } = await axios.post(`${API}/url`, {
+      filePath,
+    });
 
-  return { success: true };
+    return data.url;
+  } catch (err) {
+    return null;
+  }
 };
 
-export { uploadPdf, deletePdf, getPdfUrl, wakeSupabase };
+export { uploadPdf, deletePdf, getPdfUrl };
